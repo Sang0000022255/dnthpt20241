@@ -1,0 +1,164 @@
+\<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm ngược ngày thi THPT 2024</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            background: linear-gradient(to bottom right, #87ceeb, #f0e68c);
+        }
+        table {
+            width: 100%;
+            max-width: none;
+            border-collapse: collapse;
+            margin: 20px auto;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        th {
+            background-color: #f2f2f2;
+            font-size: 2rem;
+            color: #333;
+        }
+        .countdown, .exam-timer {
+            font-size: 1.5rem;
+        }
+        .countdown {
+            color: #4682b4;
+        }
+        .exam-timer {
+        margin-top: 10px;
+        font-size: 1.2rem;
+        color: red;
+        }
+/* Media query cho các thiết bị nhỏ hơn */
+    @media (max-width: 768px) {
+        table {
+            width: 100%; /* Độ rộng tối đa trên thiết bị nhỏ */
+            margin: 10px auto;
+        }
+
+        th, td {
+            padding: 0.8rem;
+        }
+
+        .countdown, .exam-timer {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Môn học</th>
+                <th>Đếm ngược</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ngữ Văn</td>
+                <td id="countdown-nguvan" class="countdown"></td>
+                
+            </tr>
+            <tr>
+                <td>Toán</td>
+                <td id="countdown-toan" class="countdown"></td>
+                
+            </tr>
+            <tr>
+                <td>Vật lí</td>
+                <td id="countdown-vatly" class="countdown"></td>
+                
+            </tr>
+            <tr>
+                <td>Hóa học</td>
+                <td id="countdown-hoahoc" class="countdown"></td>
+                
+            </tr>
+            <tr>
+                <td>Sinh học</td>
+                <td id="countdown-sinhoc" class="countdown"></td>
+                
+            </tr>
+            <tr>
+                <td>Lịch Sử</td>
+                <td id="countdown-lichsu" class="countdown"></td>
+                
+            </tr>
+            <tr>
+                <td>Địa Lí</td>
+                <td id="countdown-diali" class="countdown"></td>
+                
+            </tr>
+            <tr>
+                <td>Giáo Dục Công dân</td>
+                <td id="countdown-gdcd" class="countdown"></td>
+               
+            </tr>
+            <tr>
+                <td>Ngoại Ngữ</td>
+                <td id="countdown-ngoai-ngu" class="countdown"></td>
+               
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Thiết lập ngày thi THPT 2024 cho các môn học
+        const examDates = {
+            'nguvan': new Date("June 27, 2024 07:30:00").getTime(),
+            'toan': new Date("June 27, 2024 14:30:00").getTime(),
+            'vatly': new Date("June 28, 2024 07:30:00").getTime(),
+            'hoahoc': new Date("June 28, 2024 08:30:00").getTime(),
+            'sinhoc': new Date("June 28, 2024 09:30:00").getTime(),
+            'lichsu': new Date("June 28, 2024 07:00:00").getTime(),
+            'diali': new Date("June 28, 2024 08:30:00").getTime(),
+            'gdcd': new Date("June 28, 2024 09:30:00").getTime(),
+            'ngoai-ngu': new Date("June 28, 2024 14:20:00").getTime()
+        };
+
+        
+
+
+        // Cập nhật đếm ngược mỗi giây
+        const countdown = setInterval(() => {
+            const now = new Date().getTime();
+
+            for (const subject in examDates) {
+                const distance = examDates[subject] - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById(`countdown-${subject}`).innerText = `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
+
+                if (distance < 0) {
+                    document.getElementById(`countdown-${subject}`).innerText = "Đã đến ngày thi!";
+             
+                }
+            }
+        }, 1000);
+
+   
+    </script>
+</body>
+</html>
+
